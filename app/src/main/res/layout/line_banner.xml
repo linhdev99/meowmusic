@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imageViewBackgroundBanner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"/>
+    <View
+        android:background="@drawable/custom_background_banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_alignBottom="@id/imageViewBackgroundBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageViewBanner"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="2dp"/>
+        <TextView
+            android:id="@+id/textViewTitleBanner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_alignTop="@id/imageViewBanner"
+            android:layout_toRightOf="@id/imageViewBanner"
+            android:textSize="17sp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:text="Em Cua Ngay Hom Qua"/>
+        <RelativeLayout
+            android:layout_below="@id/textViewTitleBanner"
+            android:layout_toRightOf="@id/imageViewBanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp">
+            <TextView
+                android:id="@+id/textViewContentBanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#fffdfc"
+                android:layout_marginRight="20dp"
+                android:maxLines="2"
+                android:text="Lieu rang chia tay trong em co quen duoc cau ca. Tinh yeu..."/>
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

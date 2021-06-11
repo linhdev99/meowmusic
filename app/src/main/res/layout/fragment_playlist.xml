@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/textViewTitlePlaylist"
+        android:text="MEOW PLAYLIST"
+        android:textColor="#3e3b3b"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ListView
+        android:layout_below="@id/textViewTitlePlaylist"
+        android:id="@+id/listViewPlayList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+    <TextView
+        android:drawableLeft="@drawable/iconmoreplaylist"
+        android:drawablePadding="5dp"
+        android:layout_below="@id/listViewPlayList"
+        android:id="@+id/textViewViewMorePlaylist"
+        android:text="View more playlists"
+        android:textSize="19dp"
+        android:textColor="#0a0a0a"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="5dp"
+        android:background="#c9c7c7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
