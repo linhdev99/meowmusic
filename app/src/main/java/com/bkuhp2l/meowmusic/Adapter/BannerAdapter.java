@@ -1,6 +1,7 @@
 package com.bkuhp2l.meowmusic.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,13 @@ public class BannerAdapter extends PagerAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.line_banner, null);
         ImageView imgBackgroundBanner = view.findViewById(R.id.imageViewBackgroundBanner);
-        ImageView imgSongBanner = view.findViewById(R.id.imageViewBanner);
+        ImageView imgIconBanner = view.findViewById(R.id.imageViewBanner);
         TextView txtTitleSongBanner = view.findViewById(R.id.textViewTitleBanner);
         TextView txtContentBanner = view.findViewById(R.id.textViewContentBanner);
 
         Picasso.with(context).load(arrayBanner.get(position).getImage()).into(imgBackgroundBanner);
-        Picasso.with(context).load(arrayBanner.get(position).getImageSong()).into(imgSongBanner);
-        txtTitleSongBanner.setText(arrayBanner.get(position).getNameSong());
+        Picasso.with(context).load(arrayBanner.get(position).getAvatar()).into(imgIconBanner);
+        txtTitleSongBanner.setText(arrayBanner.get(position).getTitle());
         txtContentBanner.setText(arrayBanner.get(position).getContent());
 
         container.addView(view);

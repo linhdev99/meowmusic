@@ -3,9 +3,9 @@ require "connect.php";
 $str_query = "SELECT id, name, image, icon FROM playlist";
 
 $data = mysqli_query($con, $str_query);
-class playlist
+class Playlist
 {
-    function playlist(
+    function Playlist(
         $id,
         $name,
         $image,

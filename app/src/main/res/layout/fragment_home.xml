@@ -24,6 +24,19 @@
             android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Playlist">
 
         </fragment>
+        <fragment
+            android:id="@+id/fragmentTopic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Topic">
+
+        </fragment>
+
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

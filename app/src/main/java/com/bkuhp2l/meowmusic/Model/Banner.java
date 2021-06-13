@@ -4,25 +4,21 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Banner {
-
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("image")
+    @SerializedName("title")
     @Expose
-    private String image;
+    private String title;
     @SerializedName("content")
     @Expose
     private String content;
-    @SerializedName("idSong")
+    @SerializedName("avatar")
     @Expose
-    private String idSong;
-    @SerializedName("nameSong")
+    private String avatar;
+    @SerializedName("image")
     @Expose
-    private String nameSong;
-    @SerializedName("imageSong")
-    @Expose
-    private String imageSong;
+    private String image;
 
     public String getId() {
         return id;
@@ -32,12 +28,12 @@ public class Banner {
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getTitle() {
+        return title;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -48,28 +44,19 @@ public class Banner {
         this.content = content;
     }
 
-    public String getIdSong() {
-        return idSong;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setIdSong(String idSong) {
-        this.idSong = idSong;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public String getNameSong() {
-        return nameSong;
+    public String getImage() {
+        return image;
     }
 
-    public void setNameSong(String nameSong) {
-        this.nameSong = nameSong;
+    public void setImage(String image) {
+        this.image = image;
     }
-
-    public String getImageSong() {
-        return imageSong;
-    }
-
-    public void setImageSong(String imageSong) {
-        this.imageSong = imageSong;
-    }
-
 }

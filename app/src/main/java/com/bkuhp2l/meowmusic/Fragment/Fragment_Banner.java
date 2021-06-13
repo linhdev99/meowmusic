@@ -44,7 +44,7 @@ public class Fragment_Banner extends Fragment {
     }
 
     private void Mapping() {
-        viewPager = view.findViewById(R.id.viewPager);
+        viewPager = view.findViewById(R.id.viewPagerBanner);
         circleIndicator = view.findViewById(R.id.indicatorDefault);
     }
 
@@ -69,7 +69,7 @@ public class Fragment_Banner extends Fragment {
                             currentBanner = 0;
                         }
                         viewPager.setCurrentItem(currentBanner, true);
-                        handler.postDelayed(runnable, 4500);
+                        handler.postDelayed(runnable, 7500);
                     }
                 };
                 handler.postDelayed(runnable, 4500);
@@ -78,9 +78,7 @@ public class Fragment_Banner extends Fragment {
 //                    Log.d("ID Banner", banners.get(i).getId());
 //                    Log.d("Image Banner", banners.get(i).getImage());
 //                    Log.d("Content Banner", banners.get(i).getContent());
-//                    Log.d("ID Song", banners.get(i).getIdSong());
-//                    Log.d("Name Song", banners.get(i).getNameSong());
-//                    Log.d("Image Song", banners.get(i).getImageSong());
+//                    Log.d("ID Song", banners.get(i).getAvatar());
 //                }
             }
 
