@@ -1,7 +1,9 @@
 package com.bkuhp2l.meowmusic.Service;
 
+import com.bkuhp2l.meowmusic.Model.Album;
 import com.bkuhp2l.meowmusic.Model.Banner;
 import com.bkuhp2l.meowmusic.Model.Category;
+import com.bkuhp2l.meowmusic.Model.HotMusic;
 import com.bkuhp2l.meowmusic.Model.Playlist;
 import com.bkuhp2l.meowmusic.Model.Topic;
 
@@ -22,4 +24,10 @@ public interface DataService {
 
     @GET("category.php")
     Call<List<Category>> getDataCategory();
+
+    @GET("album.php")
+    Call<List<Album>> getDataAlbum();
+
+    @GET("hotmusic.php")
+    Call<List<HotMusic>> getDataHotMusic();
 }

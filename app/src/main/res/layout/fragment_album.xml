@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/relativeTopic"
+        android:id="@+id/relativeAlbum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,19 +19,19 @@
             android:background="#883CFF"/>
 
         <TextView
-            android:layout_toRightOf="@+id/imgICON"
-            android:id="@+id/textViewTitleTopic"
+            android:layout_toRightOf="@id/imgICON"
+            android:id="@+id/textViewTitleAlbum"
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"
-            android:text="TOPIC"
+            android:text="ALBUM"
             android:textColor="#000"
             android:textSize="20dp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textViewViewmoreTopic"
+            android:id="@+id/textViewViewmoreAlbum"
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewTopic"
+        android:id="@+id/recyclerViewAlbum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

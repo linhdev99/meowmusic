@@ -10,9 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/imgICON"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="7dp"
+            android:layout_height="20dp"
+            android:background="#883CFF"/>
+
         <TextView
+            android:layout_toRightOf="@id/imgICON"
             android:id="@+id/textViewTitleCategory"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_semibold"

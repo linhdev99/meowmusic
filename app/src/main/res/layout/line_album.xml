@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="190dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewAlbum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFF"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="5dp">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/imgBackgroundAlbum"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:src="@drawable/category_test"
+                android:background="@drawable/custom_background_banner"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/textViewTitleAlbum"
+                android:layout_marginLeft="10dp"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:elevation="6dp"
+                android:fontFamily="@font/open_sans"
+                android:textSize="18sp"
+                android:gravity="left"
+                android:maxLines="1"
+                android:text="Anime"
+                android:textColor="#FE292929" />
+
+            <TextView
+                android:layout_below="@id/imgBackgroundCategory"
+                android:id="@+id/textViewNameSingerAlbum"
+                android:layout_marginLeft="10dp"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:elevation="6dp"
+                android:fontFamily="@font/open_sans_light"
+                android:textSize="13sp"
+                android:gravity="left"
+                android:maxLines="1"
+                android:text="Anime"
+                android:textColor="#FE393939" />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

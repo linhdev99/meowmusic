@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="310dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center">
@@ -29,8 +29,11 @@
         android:id="@+id/textViewNameTopic"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:fontFamily="@font/open_sans"
         android:text="Anime"
+        android:textSize="20sp"
         android:textColor="#000"
         android:gravity="center"
         android:maxLines="1"

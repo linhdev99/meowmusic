@@ -28,13 +28,29 @@
             android:id="@+id/fragmentTopic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Topic">
 
         </fragment>
 
         <fragment
-            android:id="@+id/fragment"
+            android:id="@+id/fragmentCategory"
+            android:layout_marginTop="15dp"
             android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <fragment
+            android:id="@+id/fragmentAlbum"
+            android:layout_marginTop="15dp"
+            android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <fragment
+            android:id="@+id/fragmentHotmusic"
+            android:layout_marginTop="15dp"
+            android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_HotMusic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
