@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.bkuhp2l.meowmusic.Adapter.BannerAdapter;
 import com.bkuhp2l.meowmusic.Model.Banner;
@@ -22,14 +23,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.CircleIndicator3;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Fragment_Banner extends Fragment {
     View view;
-    ViewPager viewPager;
-    CircleIndicator circleIndicator;
+//    ViewPager viewPager;
+//    CircleIndicator circleIndicator;
+    ViewPager2 viewPager;
+    CircleIndicator3 circleIndicator;
     BannerAdapter bannerAdapter;
     Runnable runnable;
     Handler handler;
@@ -65,7 +69,7 @@ public class Fragment_Banner extends Fragment {
                     public void run() {
                         currentBanner = viewPager.getCurrentItem();
                         currentBanner++;
-                        if (currentBanner >= viewPager.getAdapter().getCount()) {
+                        if (currentBanner >= 3) {
                             currentBanner = 0;
                         }
                         viewPager.setCurrentItem(currentBanner, true);
@@ -73,13 +77,6 @@ public class Fragment_Banner extends Fragment {
                     }
                 };
                 handler.postDelayed(runnable, 4500);
-//                for (int i = 0; i < banners.size(); i++) {
-//                    Log.d("Line","================================");
-//                    Log.d("ID Banner", banners.get(i).getId());
-//                    Log.d("Image Banner", banners.get(i).getImage());
-//                    Log.d("Content Banner", banners.get(i).getContent());
-//                    Log.d("ID Song", banners.get(i).getAvatar());
-//                }
             }
 
             @Override

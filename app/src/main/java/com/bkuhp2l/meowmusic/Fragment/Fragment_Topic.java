@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +29,7 @@ import retrofit2.Response;
 
 public class Fragment_Topic extends Fragment {
     View view;
-    TextView txtViewmore;
+    ImageView btnViewmore;
     ArrayList<Topic> arrayTopic;
     TopicAdapter topicAdapter;
     RecyclerView recyclerViewTC;
@@ -37,7 +39,17 @@ public class Fragment_Topic extends Fragment {
         view = inflater.inflate(R.layout.fragment_topic, container, false);
         Mapping();
         GetData();
+        ButtonHandler();
         return view;
+    }
+
+    private void ButtonHandler() {
+        btnViewmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Topic", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void GetData() {
@@ -62,7 +74,7 @@ public class Fragment_Topic extends Fragment {
     }
 
     private void Mapping() {
-        txtViewmore = (TextView) view.findViewById(R.id.textViewViewmoreTopic);
         recyclerViewTC = (RecyclerView) view.findViewById(R.id.recyclerViewTopic);
+        btnViewmore = (ImageView) view.findViewById(R.id.home_button_viewmore_topic);
     }
 }

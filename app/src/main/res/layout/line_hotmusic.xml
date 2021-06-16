@@ -4,6 +4,8 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
+        android:id="@+id/btn_line_hotmusic"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout

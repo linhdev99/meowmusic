@@ -3,7 +3,9 @@ package com.bkuhp2l.meowmusic.Model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class HotMusic {
+import java.io.Serializable;
+
+public class HotMusic implements Serializable {
     @SerializedName("idSong")
     @Expose
     private String idSong;

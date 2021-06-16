@@ -28,7 +28,6 @@ import retrofit2.Response;
 public class Fragment_HotMusic extends Fragment {
     View view;
     RecyclerView recyclerView;
-    TextView txtViewmoreHotmusic;
     ArrayList<HotMusic> arrayHotMusic;
     HotMusicAdapter hotmusicAdapter;
     @Nullable
@@ -64,6 +63,5 @@ public class Fragment_HotMusic extends Fragment {
 
     private void Mapping() {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerViewHotmusic);
-        txtViewmoreHotmusic = (TextView) view.findViewById(R.id.textViewViewmoreHotmusic);
     }
 }

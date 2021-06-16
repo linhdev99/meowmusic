@@ -27,7 +27,6 @@ import retrofit2.Response;
 
 public class Fragment_Album extends Fragment {
     View view;
-    TextView txtViewmoreAlbum;
     ArrayList<Album> arrayAlbum;
     AlbumAdapter albumAdapter;
     RecyclerView recyclerViewAlbum;
@@ -62,7 +61,6 @@ public class Fragment_Album extends Fragment {
     }
 
     private void Mapping() {
-        txtViewmoreAlbum = (TextView) view.findViewById(R.id.textViewViewmoreAlbum);
         recyclerViewAlbum = (RecyclerView) view.findViewById(R.id.recyclerViewAlbum);
     }
 }

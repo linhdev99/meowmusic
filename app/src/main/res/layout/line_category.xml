@@ -8,11 +8,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewCategory"
+        android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="#8730FF"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp">
         <ImageView

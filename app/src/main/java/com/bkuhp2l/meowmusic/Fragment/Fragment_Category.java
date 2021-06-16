@@ -29,7 +29,6 @@ import retrofit2.Response;
 
 public class Fragment_Category extends Fragment {
     View view;
-    TextView txtViewmore;
     ArrayList<Category> arrayCategory;
     CategoryAdapter categoryAdapter;
     RecyclerView recyclerViewTC;
@@ -64,7 +63,6 @@ public class Fragment_Category extends Fragment {
     }
 
     private void Mapping() {
-        txtViewmore = (TextView) view.findViewById(R.id.textViewViewmoreCategory);
         recyclerViewTC = (RecyclerView) view.findViewById(R.id.recyclerViewCategory);
     }
 }

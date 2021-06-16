@@ -1,15 +1,20 @@
 package com.bkuhp2l.meowmusic.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bkuhp2l.meowmusic.Activity.PlayMusicActivity;
 import com.bkuhp2l.meowmusic.Model.HotMusic;
 import com.bkuhp2l.meowmusic.R;
 import com.squareup.picasso.Picasso;
@@ -39,6 +44,15 @@ public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHo
         Picasso.with(mContext).load(topic.getImgSong()).into(holder.imgAvatar);
         holder.txtSong.setText(topic.getNameSong());
         holder.txtSinger.setText(topic.getNameSinger());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Toast.makeText(mContext, mHotMusics.get(position).getNameSong(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext, PlayMusicActivity.class);
+                intent.putExtra("hotmusic", mHotMusics.get(position));
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -51,6 +65,7 @@ public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHo
         TextView txtSinger;
         ImageView imgAvatar;
         ImageView iconBtnLove;
+        CardView btnLineHotmusic;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -58,6 +73,7 @@ public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHo
             txtSinger = itemView.findViewById(R.id.textViewNameSingerHotMusic);
             imgAvatar = itemView.findViewById(R.id.imgAvatarSongHotMusic);
             iconBtnLove = itemView.findViewById(R.id.imgBtnLoveSongHotMusic);
+            btnLineHotmusic = itemView.findViewById(R.id.btn_line_hotmusic);
         }
     }
 }
