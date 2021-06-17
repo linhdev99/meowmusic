@@ -23,13 +23,12 @@ public class Fragment_PlayMusic_DiscMusic extends Fragment {
     View view;
     CircleImageView imgDiscMusic, imgDiscMusicCore;
     ObjectAnimator objAnimator;
-    HotMusic hotMusic;
+    public String urlImgSong;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_playmusic_discmusic, container, false);
         Mapping();
-        DataIntent();
         InitialData();
         DiscAnimation(imgDiscMusic);
         DiscAnimation(imgDiscMusicCore);
@@ -37,16 +36,7 @@ public class Fragment_PlayMusic_DiscMusic extends Fragment {
     }
 
     private void InitialData() {
-        Picasso.with(getActivity()).load(hotMusic.getImgSong()).into(imgDiscMusic);
-    }
-
-    private void DataIntent() {
-        Intent intent = getActivity().getIntent();
-        if (intent != null){
-            if (intent.hasExtra("hotmusic")) {
-                hotMusic = (HotMusic) intent.getSerializableExtra("hotmusic");
-            }
-        }
+        Picasso.with(getActivity()).load(urlImgSong).into(imgDiscMusic);
     }
 
     private void DiscAnimation(CircleImageView imageCircle) {

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 
 import com.bkuhp2l.meowmusic.Adapter.MainViewPagerAdapter;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_Home;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         actionBar = getSupportActionBar();
         actionBar.hide();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mapping();

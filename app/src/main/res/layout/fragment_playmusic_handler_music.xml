@@ -66,7 +66,7 @@
                             android:paddingTop="15dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="15dp"
-                            android:scaleType="fitXY"
+                            android:scaleType="fitCenter"
                             android:src="@drawable/playmusicshuffle"
                             app:tint="#FFF" />
             </RelativeLayout>
@@ -84,7 +84,7 @@
                             android:paddingTop="20dp"
                             android:paddingRight="20dp"
                             android:paddingBottom="20dp"
-                            android:scaleType="fitXY"
+                            android:scaleType="fitCenter"
                             android:src="@drawable/playmusicprevious"
                             app:tint="#FFF" />
 
@@ -103,7 +103,7 @@
                             android:paddingTop="20dp"
                             android:paddingRight="20dp"
                             android:paddingBottom="20dp"
-                            android:scaleType="fitXY"
+                            android:scaleType="fitCenter"
                             android:src="@drawable/playmusicplay"
                             app:tint="#FFF" />
 
@@ -122,7 +122,7 @@
                             android:paddingTop="20dp"
                             android:paddingRight="20dp"
                             android:paddingBottom="20dp"
-                            android:scaleType="fitXY"
+                            android:scaleType="fitCenter"
                             android:src="@drawable/playmusicnext"
                             app:tint="#FFF" />
 
@@ -141,7 +141,7 @@
                             android:paddingTop="15dp"
                             android:paddingRight="15dp"
                             android:paddingBottom="15dp"
-                            android:scaleType="fitXY"
+                            android:scaleType="fitCenter"
                             android:src="@drawable/playmusicrepeat"
                             app:tint="#FFF" />
 

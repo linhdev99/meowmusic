@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
+    android:background="@null"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <RelativeLayout
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_disc_music"
             android:layout_centerInParent="true"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             android:src="@drawable/topic_test"
             app:civ_border_width="3dp"
             app:civ_border_color="#FF000000"/>
@@ -21,8 +17,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_disc_music_cover"
             android:layout_centerInParent="true"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             android:src="@drawable/discmusiccell"
             android:alpha="0.2"
             app:civ_border_width="3dp"
@@ -30,10 +26,9 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_disc_music_core"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="97dp"
+            android:layout_height="97dp"
             android:layout_centerInParent="true"
             android:src="@drawable/discmusiccore"/>
-    </RelativeLayout>
 
 </RelativeLayout>
