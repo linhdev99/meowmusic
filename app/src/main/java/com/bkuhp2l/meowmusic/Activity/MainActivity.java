@@ -12,6 +12,7 @@ import com.bkuhp2l.meowmusic.Fragment.Fragment_Home;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_PlayMusic;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_Search;
 import com.bkuhp2l.meowmusic.R;
+import com.bkuhp2l.meowmusic.Service.PlayMusicService;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void init() {
         getSupportActionBar().setElevation(0);
+        PlayMusicService.getInstance();
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(this);
         mainViewPagerAdapter.addFragment(new Fragment_Home(), "Home");
         mainViewPagerAdapter.addFragment(new Fragment_Search(), "Search");

@@ -13,14 +13,20 @@ public class PlayMusicService {
     public static MediaPlayer mediaPlayer = null;
     public static PlayMp3 playmusic_mp3;
     public static String linkSong;
+    public static String idSong;
 
-    public static PlayMusicService getInstance(String link) {
-        linkSong = link;
+    public static PlayMusicService getInstance() {
         playmusic_mp3 = new PlayMp3();
+        return Mp3Service;
+    }
+    public static void setLinkSong(String id, String link) {
+        idSong = id;
+        linkSong = link;
+    }
+    public static void PlayNewMusic() {
         playmusic_mp3.initialPlayMp3(linkSong);
         mediaPlayer = playmusic_mp3.getMediaPlayer();
         Log.d("media", String.valueOf(mediaPlayer));
-        return Mp3Service;
     }
 
     public static String getTimeSongTotal() {
@@ -58,10 +64,30 @@ public class PlayMusicService {
         return mediaPlayer.isPlaying();
     }
 
+    public static int getIdSongInt() {
+        int result = -1;
+        try {
+            result = Integer.parseInt(idSong);
+        }
+        catch (Exception err) {
+            result = -1;
+        }
+        return result;
+    }
+
+    public static String getIdSongString() {
+        return idSong;
+    }
+
 
     static class PlayMp3 extends AsyncTask<String, Void, String> {
         MediaPlayer media;
         public void initialPlayMp3(String urlSong) {
+            if (media != null) {
+                if (media.isPlaying()) {
+                    media.stop();
+                }
+            }
             onPostExecute(urlSong);
         }
         @Override

@@ -120,7 +120,11 @@ public class PlayMusicActivity extends AppCompatActivity {
     private void InitialMedia() {
 //        PlayMp3 playmusic_mp3 = new PlayMp3();
 //        playmusic_mp3.execute(hotMusic.getLinkSong());
-        PlayMusicService.getInstance(hotMusic.getLinkSong());
+        if (Integer.parseInt(hotMusic.getIdSong()) != PlayMusicService.getIdSongInt()) {
+//            Toast.makeText(this, hotMusic.getIdSong() + " = " + PlayMusicService.getIdSongString(), Toast.LENGTH_SHORT).show();
+            PlayMusicService.setLinkSong(hotMusic.getIdSong(), hotMusic.getLinkSong());
+            PlayMusicService.PlayNewMusic();
+        }
         txt_time_current.setText(PlayMusicService.getTimeSongCurrent());
         txt_time_total.setText(PlayMusicService.getTimeSongTotal());
         seekbar_song.setMax(PlayMusicService.getTimeSongDuration());
