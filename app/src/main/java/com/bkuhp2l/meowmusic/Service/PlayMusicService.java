@@ -79,6 +79,9 @@ public class PlayMusicService {
         return idSong;
     }
 
+    public static MediaPlayer getMediaPlayer() {
+        return mediaPlayer;
+    }
 
     static class PlayMp3 extends AsyncTask<String, Void, String> {
         MediaPlayer media;

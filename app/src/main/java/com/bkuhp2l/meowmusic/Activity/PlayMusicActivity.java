@@ -108,6 +108,22 @@ public class PlayMusicActivity extends AppCompatActivity {
                 }
             }
         });
+        seekbar_song.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                PlayMusicService.getMediaPlayer().seekTo(seekBar.getProgress());
+            }
+        });
 //        Handler handler = new Handler();
 //        handler.postDelayed(new Runnable() {
 //            @Override
@@ -130,6 +146,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         seekbar_song.setMax(PlayMusicService.getTimeSongDuration());
         int test = PlayMusicService.getTimeSongDuration();
         btn_play.setImageResource(R.drawable.playmusicpause);
+        UpdateTimeSong();
     }
 
     private void SetupViewPager2() {
@@ -194,40 +211,28 @@ public class PlayMusicActivity extends AppCompatActivity {
         btn_repeat = (ImageView) this.findViewById(R.id.btn_playmusic_handler_repeat);
     }
 
-//    class PlayMp3 extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            return strings[0];
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String song) {
-//            super.onPostExecute(song);
-//            try {
-//            mediaPlayer = new MediaPlayer();
-//            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                @Override
-//                public void onCompletion(MediaPlayer mediaPlayer) {
-//                    mediaPlayer.stop();
-//                    mediaPlayer.reset();
-//                }
-//            });
-//                mediaPlayer.setDataSource(song);
-//                mediaPlayer.prepare();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            mediaPlayer.start();
-//            TimeSong();
-//        }
-//    }
-//
-//    private void TimeSong() {
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
-//        txt_time_current.setText(simpleDateFormat.format(mediaPlayer.getCurrentPosition()));
-//        txt_time_total.setText(simpleDateFormat.format(mediaPlayer.getDuration()));
-//        seekbar_song.setMax(mediaPlayer.getDuration());
-//    }
+    private void UpdateTimeSong() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (PlayMusicService.getMediaPlayer() != null) {
+                    seekbar_song.setProgress(PlayMusicService.getMediaPlayer().getCurrentPosition());
+                    txt_time_current.setText(PlayMusicService.getTimeSongCurrent());
+                    handler.postDelayed(this, 300);
+                    PlayMusicService.getMediaPlayer().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            return;
+                        }
+                    });
+                }
+            }
+        }, 300);
+    }
 }
