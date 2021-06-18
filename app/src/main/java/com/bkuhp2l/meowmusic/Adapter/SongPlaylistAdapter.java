@@ -2,6 +2,7 @@ package com.bkuhp2l.meowmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,19 +25,19 @@ import java.util.ArrayList;
 public class SongPlaylistAdapter extends RecyclerView.Adapter<SongPlaylistAdapter.ViewHolder> {
     public Context mContext;
     public ArrayList<Song> mSongs;
-    public int id_current_play;
+    public OnSongListener mOnSongListener;
 
-    public SongPlaylistAdapter(Context mContext, ArrayList<Song> mSongs, int id_current_play) {
+    public SongPlaylistAdapter(Context mContext, ArrayList<Song> mSongs, OnSongListener onSongListener) {
         this.mContext = mContext;
         this.mSongs = mSongs;
-        this.id_current_play = id_current_play;
+        this.mOnSongListener = onSongListener;
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View topicView = inflater.inflate(R.layout.line_playmusic_song, parent, false);
-        ViewHolder viewHolder = new ViewHolder(topicView);
+        View songPlaylistView = inflater.inflate(R.layout.line_playmusic_song, parent, false);
+        ViewHolder viewHolder = new ViewHolder(songPlaylistView, mOnSongListener);
         return viewHolder;
     }
 
@@ -46,17 +47,6 @@ public class SongPlaylistAdapter extends RecyclerView.Adapter<SongPlaylistAdapte
         holder.txtSong.setText(song.getNameSong());
         holder.txtSinger.setText(song.getNameSinger());
         holder.txtIndex.setText(String.valueOf(position+1));
-        if (position == this.id_current_play) {
-            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.choose_song_play));
-        } else {
-            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(mContext, R.color.notchoose_song_play));
-        }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "Click", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
@@ -64,20 +54,34 @@ public class SongPlaylistAdapter extends RecyclerView.Adapter<SongPlaylistAdapte
         return mSongs.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView txtSong;
         TextView txtSinger;
         TextView txtIndex;
         ImageView btnLove;
         CardView cardView;
 
-        public ViewHolder(View itemView) {
+        OnSongListener onSongListener;
+
+        public ViewHolder(View itemView, OnSongListener onSongListener) {
             super(itemView);
             txtSong = itemView.findViewById(R.id.textview_playmusic_song_namesong);
             txtSinger = itemView.findViewById(R.id.textview_playmusic_song_namesinger);
             txtIndex = itemView.findViewById(R.id.textview_playmusic_song_index);
             btnLove = itemView.findViewById(R.id.btn_playmusic_song_love);
             cardView = itemView.findViewById(R.id.btn_cardview_song_playlist);
+            this.onSongListener = onSongListener;
+
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onSongListener.onSongClick(getBindingAdapterPosition());
+        }
+    }
+    
+    public interface OnSongListener {
+        void onSongClick(int position);
     }
 }

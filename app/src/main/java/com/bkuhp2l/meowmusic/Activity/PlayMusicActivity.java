@@ -2,6 +2,7 @@ package com.bkuhp2l.meowmusic.Activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bkuhp2l.meowmusic.Adapter.PlayMusicPagerAdapter;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_PlayMusic_DiscMusic;
@@ -45,7 +47,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     Fragment_PlayMusic_Playlist fragment_playMusic_playlist;
     Fragment_PlayMusic_DiscMusic fragment_playMusic_discMusic;
     Fragment_PlayMusic_Information fragment_playMusic_information;
-//    MediaPlayer mediaPlayer;
+    ArrayList<Song> arraySong;
     TextView txt_time_current, txt_time_total;
     SeekBar seekbar_song;
     ImageView btn_shuffle, btn_previous, btn_play, btn_next, btn_repeat;
@@ -55,6 +57,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         setContentView(R.layout.activity_play_music);
         actionBar = getSupportActionBar();
         actionBar.hide();
+        arraySong = new ArrayList<>();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Mapping();
@@ -139,6 +142,21 @@ public class PlayMusicActivity extends AppCompatActivity {
         UpdateTimeSong();
     }
 
+    public void PlayMusicById(int id) {
+        song = arraySong.get(id);
+        txtSong.setText(song.getNameSong());
+        txtSinger.setText(song.getNameSinger());
+        Picasso.with(this).load(song.getImgSong()).into(blurBackground);
+        fragment_playMusic_discMusic.urlImgSong = song.getImgSong();
+        fragment_playMusic_discMusic.setImgDiscMusic();
+        PlayMusicService.setLinkSong(song.getIdSong(), song.getLinkSong());
+        PlayMusicService.PlayNewMusic();
+        txt_time_current.setText(PlayMusicService.getTimeSongCurrent());
+        txt_time_total.setText(PlayMusicService.getTimeSongTotal());
+        seekbar_song.setMax(PlayMusicService.getTimeSongDuration());
+        btn_play.setImageResource(R.drawable.playmusicpause);
+    }
+
     private void SetupViewPager2() {
         playMusicPagerAdapter = new PlayMusicPagerAdapter(this );
         playMusicPagerAdapter.addFragment(fragment_playMusic_playlist);
@@ -178,7 +196,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         if (intent != null){
             if (intent.hasExtra("music_playlist_array")) {
                 int cur_id = (int) intent.getSerializableExtra("music_playlist_id_current");
-                ArrayList<Song> arraySong = (ArrayList<Song>) intent.getSerializableExtra("music_playlist_array");
+                arraySong = (ArrayList<Song>) intent.getSerializableExtra("music_playlist_array");
                 song = arraySong.get(cur_id);
                 Log.d("song", String.valueOf(song));
             }

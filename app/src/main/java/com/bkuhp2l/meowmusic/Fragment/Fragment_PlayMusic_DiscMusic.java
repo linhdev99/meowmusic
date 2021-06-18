@@ -37,6 +37,10 @@ public class Fragment_PlayMusic_DiscMusic extends Fragment {
         Picasso.with(getActivity()).load(urlImgSong).into(imgDiscMusic);
     }
 
+    public void setImgDiscMusic() {
+        Picasso.with(getActivity()).load(urlImgSong).into(imgDiscMusic);
+    }
+
     private void DiscAnimation(CircleImageView imageCircle) {
         objAnimator = ObjectAnimator.ofFloat(imageCircle,"rotation",0f,360f);
         objAnimator.setDuration(15000);
