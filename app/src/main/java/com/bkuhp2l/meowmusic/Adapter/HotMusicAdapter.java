@@ -47,7 +47,8 @@ public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHo
             public void onClick(View view) {
 //                Toast.makeText(mContext, mHotMusics.get(position).getNameSong(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, PlayMusicActivity.class);
-                intent.putExtra("hotmusic", mSongs.get(position));
+                intent.putExtra("music_playlist_array", mSongs);
+                intent.putExtra("music_playlist_id_current", position);
                 mContext.startActivity(intent);
             }
         });

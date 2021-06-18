@@ -10,6 +10,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -24,6 +25,8 @@ import com.bkuhp2l.meowmusic.Model.Song;
 import com.bkuhp2l.meowmusic.R;
 import com.bkuhp2l.meowmusic.Service.PlayMusicService;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
@@ -173,8 +176,11 @@ public class PlayMusicActivity extends AppCompatActivity {
     private void DataIntent() {
         Intent intent = getIntent();
         if (intent != null){
-            if (intent.hasExtra("hotmusic")) {
-                song = (Song) intent.getSerializableExtra("hotmusic");
+            if (intent.hasExtra("music_playlist_array")) {
+                int cur_id = (int) intent.getSerializableExtra("music_playlist_id_current");
+                ArrayList<Song> arraySong = (ArrayList<Song>) intent.getSerializableExtra("music_playlist_array");
+                song = arraySong.get(cur_id);
+                Log.d("song", String.valueOf(song));
             }
         }
     }
