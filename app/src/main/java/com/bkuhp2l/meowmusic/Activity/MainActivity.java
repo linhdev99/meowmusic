@@ -9,7 +9,6 @@ import android.os.StrictMode;
 
 import com.bkuhp2l.meowmusic.Adapter.MainViewPagerAdapter;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_Home;
-import com.bkuhp2l.meowmusic.Fragment.Fragment_PlayMusic;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_Search;
 import com.bkuhp2l.meowmusic.R;
 import com.bkuhp2l.meowmusic.Service.PlayMusicService;
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.icontrangchu);
         tabLayout.getTabAt(1).setIcon(R.drawable.icontimkiem);
 //        tabLayout.getTabAt(2).setIcon(R.drawable.playmusiclayout);
-
         TabLayout.Tab tab = tabLayout.getTabAt(0);
         tab.select();
     }

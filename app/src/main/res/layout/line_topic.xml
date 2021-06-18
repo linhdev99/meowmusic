@@ -20,7 +20,7 @@
             android:layout_width="300dp"
             android:layout_height="100dp"
             android:src="@drawable/topic_test"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
     </androidx.cardview.widget.CardView>
 

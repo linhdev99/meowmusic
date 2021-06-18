@@ -12,11 +12,12 @@
         app:cardElevation="1dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp">
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="5dp">
 
         <ImageView
             android:id="@+id/imgBackgroundPlaylist"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:layout_width="match_parent"
             android:layout_height="110dp"/>
         <View
@@ -36,7 +37,7 @@
         app:cardCornerRadius="25dp">
         <ImageView
             android:id="@+id/imgPlaylist"
-            android:scaleType="fitXY"
+            android:scaleType="centerCrop"
             android:layout_width="50dp"
             android:layout_height="50dp"/>
     </androidx.cardview.widget.CardView>

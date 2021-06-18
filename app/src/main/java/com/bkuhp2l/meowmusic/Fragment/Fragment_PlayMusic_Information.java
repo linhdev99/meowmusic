@@ -11,12 +11,12 @@ import androidx.fragment.app.Fragment;
 
 import com.bkuhp2l.meowmusic.R;
 
-public class Fragment_PlayMusic extends Fragment {
+public class Fragment_PlayMusic_Information extends Fragment {
     View view;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_playmusic, container, false);
+        view = inflater.inflate(R.layout.fragment_playmusic_information, container, false);
         return view;
     }
 }

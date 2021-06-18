@@ -6,37 +6,40 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/btn_line_hotmusic"
         android:foreground="?android:attr/selectableItemBackground"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#27000000"
+        app:cardCornerRadius="5dp">
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="10dp">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/linearLayoutSongHotMusic"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardViewAvatarSongHotMusic"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center_vertical">
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="2dp">
-                    <ImageView
-                        android:id="@+id/imgAvatarSongHotMusic"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/topic_test"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="1"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/open_sans"
+                    android:textColor="#FE292929"/>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_gravity="center"
@@ -45,7 +48,7 @@
                     >
                     <TextView
                         android:id="@+id/textViewNameSongHotMusic"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Line 1"
                         android:textSize="20sp"
@@ -56,7 +59,7 @@
 
                     <TextView
                         android:id="@+id/textViewNameSingerHotMusic"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/textViewNameSongHotMusic"
                         android:text="Line2"

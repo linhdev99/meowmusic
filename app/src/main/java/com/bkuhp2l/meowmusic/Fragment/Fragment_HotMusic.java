@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bkuhp2l.meowmusic.Adapter.HotMusicAdapter;
-import com.bkuhp2l.meowmusic.Model.HotMusic;
+import com.bkuhp2l.meowmusic.Model.Song;
 import com.bkuhp2l.meowmusic.R;
 import com.bkuhp2l.meowmusic.Service.APIService;
 import com.bkuhp2l.meowmusic.Service.DataService;
@@ -28,7 +27,7 @@ import retrofit2.Response;
 public class Fragment_HotMusic extends Fragment {
     View view;
     RecyclerView recyclerView;
-    ArrayList<HotMusic> arrayHotMusic;
+    ArrayList<Song> arraySong;
     HotMusicAdapter hotmusicAdapter;
     @Nullable
     @Override
@@ -41,12 +40,12 @@ public class Fragment_HotMusic extends Fragment {
 
     private void GetData() {
         DataService dataService = APIService.getService();
-        Call<List<HotMusic>> callback = dataService.getDataHotMusic();
-        callback.enqueue(new Callback<List<HotMusic>>() {
+        Call<List<Song>> callback = dataService.getDataHotMusic();
+        callback.enqueue(new Callback<List<Song>>() {
             @Override
-            public void onResponse(Call<List<HotMusic>> call, Response<List<HotMusic>> response) {
-                arrayHotMusic = (ArrayList<HotMusic>) response.body();
-                hotmusicAdapter = new HotMusicAdapter(getActivity(), arrayHotMusic);
+            public void onResponse(Call<List<Song>> call, Response<List<Song>> response) {
+                arraySong = (ArrayList<Song>) response.body();
+                hotmusicAdapter = new HotMusicAdapter(getActivity(), arraySong);
                 recyclerView.setAdapter(hotmusicAdapter);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -54,7 +53,7 @@ public class Fragment_HotMusic extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<HotMusic>> call, Throwable t) {
+            public void onFailure(Call<List<Song>> call, Throwable t) {
 
             }
         });

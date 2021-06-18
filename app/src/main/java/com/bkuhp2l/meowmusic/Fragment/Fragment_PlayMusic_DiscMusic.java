@@ -2,7 +2,6 @@ package com.bkuhp2l.meowmusic.Fragment;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bkuhp2l.meowmusic.Model.HotMusic;
 import com.bkuhp2l.meowmusic.R;
 import com.squareup.picasso.Picasso;
 

@@ -2,20 +2,18 @@ package com.bkuhp2l.meowmusic.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bkuhp2l.meowmusic.Activity.PlayMusicActivity;
-import com.bkuhp2l.meowmusic.Model.HotMusic;
+import com.bkuhp2l.meowmusic.Model.Song;
 import com.bkuhp2l.meowmusic.R;
 import com.squareup.picasso.Picasso;
 
@@ -23,11 +21,11 @@ import java.util.ArrayList;
 
 public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHolder> {
     public Context mContext;
-    public ArrayList<HotMusic> mHotMusics;
+    public ArrayList<Song> mSongs;
 
-    public HotMusicAdapter(Context mContext, ArrayList<HotMusic> mHotMusics) {
+    public HotMusicAdapter(Context mContext, ArrayList<Song> mSongs) {
         this.mContext = mContext;
-        this.mHotMusics = mHotMusics;
+        this.mSongs = mSongs;
     }
     @NonNull
     @Override
@@ -40,7 +38,7 @@ public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull HotMusicAdapter.ViewHolder holder, int position) {
-        HotMusic topic = mHotMusics.get(position);
+        Song topic = mSongs.get(position);
         Picasso.with(mContext).load(topic.getImgSong()).into(holder.imgAvatar);
         holder.txtSong.setText(topic.getNameSong());
         holder.txtSinger.setText(topic.getNameSinger());
@@ -49,7 +47,7 @@ public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHo
             public void onClick(View view) {
 //                Toast.makeText(mContext, mHotMusics.get(position).getNameSong(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, PlayMusicActivity.class);
-                intent.putExtra("hotmusic", mHotMusics.get(position));
+                intent.putExtra("hotmusic", mSongs.get(position));
                 mContext.startActivity(intent);
             }
         });
@@ -57,7 +55,7 @@ public class HotMusicAdapter extends RecyclerView.Adapter<HotMusicAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mHotMusics.size();
+        return mSongs.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

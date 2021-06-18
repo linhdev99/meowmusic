@@ -1,5 +1,7 @@
 package com.bkuhp2l.meowmusic.Fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bkuhp2l.meowmusic.Activity.MorePlaylistActivity;
 import com.bkuhp2l.meowmusic.Adapter.PlaylistAdapter;
 import com.bkuhp2l.meowmusic.Model.Playlist;
 import com.bkuhp2l.meowmusic.R;
@@ -39,7 +42,19 @@ public class Fragment_Playlist extends Fragment {
         view = inflater.inflate(R.layout.fragment_playlist, container, false);
         Mapping();
         GetData();
+        EventClick();
         return view;
+    }
+
+    private void EventClick() {
+        txtViewMorePlaylist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getActivity();
+                Intent intent = new Intent(context, MorePlaylistActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void Mapping() {

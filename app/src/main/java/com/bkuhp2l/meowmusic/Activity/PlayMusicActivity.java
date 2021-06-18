@@ -5,40 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bkuhp2l.meowmusic.Adapter.PlayMusicPagerAdapter;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_PlayMusic_DiscMusic;
-import com.bkuhp2l.meowmusic.Fragment.Fragment_PlayMusic_HandlerMusic;
+import com.bkuhp2l.meowmusic.Fragment.Fragment_PlayMusic_Information;
 import com.bkuhp2l.meowmusic.Fragment.Fragment_PlayMusic_Playlist;
-import com.bkuhp2l.meowmusic.Model.HotMusic;
+import com.bkuhp2l.meowmusic.Model.Song;
 import com.bkuhp2l.meowmusic.R;
 import com.bkuhp2l.meowmusic.Service.PlayMusicService;
-import com.jgabrielfreitas.core.BlurImageView;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
 import me.relex.circleindicator.CircleIndicator3;
@@ -48,13 +34,14 @@ public class PlayMusicActivity extends AppCompatActivity {
     ImageView btnHidePlayMusic;
     ImageView blurBackground;
     BlurView blurView;
-    HotMusic hotMusic;
+    Song song;
     ActionBar actionBar;
     ViewPager2 viewPager2;
     PlayMusicPagerAdapter playMusicPagerAdapter;
     CircleIndicator3 circleIndicatorPlaymusic;
     Fragment_PlayMusic_Playlist fragment_playMusic_playlist;
     Fragment_PlayMusic_DiscMusic fragment_playMusic_discMusic;
+    Fragment_PlayMusic_Information fragment_playMusic_information;
 //    MediaPlayer mediaPlayer;
     TextView txt_time_current, txt_time_total;
     SeekBar seekbar_song;
@@ -136,9 +123,9 @@ public class PlayMusicActivity extends AppCompatActivity {
     private void InitialMedia() {
 //        PlayMp3 playmusic_mp3 = new PlayMp3();
 //        playmusic_mp3.execute(hotMusic.getLinkSong());
-        if (Integer.parseInt(hotMusic.getIdSong()) != PlayMusicService.getIdSongInt()) {
+        if (Integer.parseInt(song.getIdSong()) != PlayMusicService.getIdSongInt()) {
 //            Toast.makeText(this, hotMusic.getIdSong() + " = " + PlayMusicService.getIdSongString(), Toast.LENGTH_SHORT).show();
-            PlayMusicService.setLinkSong(hotMusic.getIdSong(), hotMusic.getLinkSong());
+            PlayMusicService.setLinkSong(song.getIdSong(), song.getLinkSong());
             PlayMusicService.PlayNewMusic();
         }
         txt_time_current.setText(PlayMusicService.getTimeSongCurrent());
@@ -153,6 +140,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         playMusicPagerAdapter = new PlayMusicPagerAdapter(this );
         playMusicPagerAdapter.addFragment(fragment_playMusic_playlist);
         playMusicPagerAdapter.addFragment(fragment_playMusic_discMusic);
+        playMusicPagerAdapter.addFragment(fragment_playMusic_information);
         viewPager2.setAdapter(playMusicPagerAdapter);
         viewPager2.setCurrentItem(1);
         circleIndicatorPlaymusic.setViewPager(viewPager2);
@@ -160,10 +148,10 @@ public class PlayMusicActivity extends AppCompatActivity {
     }
 
     private void SetDataIntent() {
-        txtSong.setText(hotMusic.getNameSong());
-        txtSinger.setText(hotMusic.getNameSinger());
-        Picasso.with(this).load(hotMusic.getImgSong()).into(blurBackground);
-        fragment_playMusic_discMusic.urlImgSong = hotMusic.getImgSong();
+        txtSong.setText(song.getNameSong());
+        txtSinger.setText(song.getNameSinger());
+        Picasso.with(this).load(song.getImgSong()).into(blurBackground);
+        fragment_playMusic_discMusic.urlImgSong = song.getImgSong();
         BlurBackground();
     }
 
@@ -186,7 +174,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null){
             if (intent.hasExtra("hotmusic")) {
-                hotMusic = (HotMusic) intent.getSerializableExtra("hotmusic");
+                song = (Song) intent.getSerializableExtra("hotmusic");
             }
         }
     }
@@ -194,6 +182,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     private void Mapping() {
         fragment_playMusic_playlist = new Fragment_PlayMusic_Playlist();
         fragment_playMusic_discMusic = new Fragment_PlayMusic_DiscMusic();
+        fragment_playMusic_information = new Fragment_PlayMusic_Information();
         txtSong = (TextView) this.findViewById(R.id.textview_playmusic_namesong);
         txtSinger = (TextView) this.findViewById(R.id.textview_playmusic_namesinger);
         btnHidePlayMusic = (ImageView) this.findViewById(R.id.btn_hide_playmusic);

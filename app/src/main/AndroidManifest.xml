@@ -11,15 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeowMusic">
         <activity
+            android:name=".Activity.MorePlaylistActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
             android:name=".Activity.PlayMusicActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activity.AdvertisementActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activity.MainActivity"
             android:screenOrientation="portrait">

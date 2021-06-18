@@ -21,7 +21,7 @@
             android:layout_height="120dp"
             android:src="@drawable/category_test"
             android:background="@drawable/custom_background_banner"
-            android:scaleType="fitXY" />
+            android:scaleType="centerCrop" />
 
     </androidx.cardview.widget.CardView>
 
