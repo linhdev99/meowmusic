@@ -2,12 +2,15 @@ package com.bkuhp2l.meowmusic.Activity;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -29,6 +32,8 @@ import com.bkuhp2l.meowmusic.Service.PlayMusicService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import eightbitlab.com.blurview.BlurView;
 import eightbitlab.com.blurview.RenderScriptBlur;
@@ -40,6 +45,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     ImageView blurBackground;
     BlurView blurView;
     Song song;
+    int id_cur_song, id_cur_on_playlist;
     ActionBar actionBar;
     ViewPager2 viewPager2;
     PlayMusicPagerAdapter playMusicPagerAdapter;
@@ -51,6 +57,8 @@ public class PlayMusicActivity extends AppCompatActivity {
     TextView txt_time_current, txt_time_total;
     SeekBar seekbar_song;
     ImageView btn_shuffle, btn_previous, btn_play, btn_next, btn_repeat;
+    int song_state = 0; // 0: next = next + 1, 1: shuffle, 2: return_unlimit, 3: return_onetime
+    boolean song_next = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +74,6 @@ public class PlayMusicActivity extends AppCompatActivity {
         SetupViewPager2();
         InitialMedia();
         EventClick();
-
     }
 
     @Override
@@ -76,29 +83,15 @@ public class PlayMusicActivity extends AppCompatActivity {
 
     private void EventBackHome() {
         finish();
-//        PlayMusicService.stopMusic();
     }
 
 
     private void EventClick() {
+        PlayMusicCheckSongState();
         btnHidePlayMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EventBackHome();
-            }
-        });
-        btn_play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (PlayMusicService.isPlayingMusic()) {
-                    PlayMusicService.pauseMusic();
-                    btn_play.setImageResource(R.drawable.playmusicplay);
-                }
-                else
-                {
-                    PlayMusicService.startMusic();
-                    btn_play.setImageResource(R.drawable.playmusicpause);
-                }
             }
         });
         seekbar_song.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -117,44 +110,166 @@ public class PlayMusicActivity extends AppCompatActivity {
                 PlayMusicService.getMediaPlayer().seekTo(seekBar.getProgress());
             }
         });
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        }, 500);
+    }
+
+    public void PlayMusicCheckSongState() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (song_next)
+                {
+                    song_state = PlayMusicService.getSongStateNext();
+                    if (song_state == 0) {
+//                        PlayMusicService.setAutoNextSong(false);
+                        song_next = false;
+                        NextClickButton();
+                    }
+                    else if (song_state == 1) {
+//                        PlayMusicService.setAutoNextSong(false);
+                        song_next = false;
+                        int id_temp = id_cur_on_playlist;
+                        while (id_temp == id_cur_on_playlist) {
+                            id_temp = ThreadLocalRandom.current().nextInt(0, arraySong.size() - 1);
+                        }
+                        PlayMusicById(id_temp);
+                    }
+                    else if (song_state == 2) {
+//                        PlayMusicService.setAutoNextSong(false);
+                        song_next = false;
+                        PlayMusicService.getMediaPlayer().seekTo(0);
+                        PlayMusicService.getMediaPlayer().start();
+                    }
+                    handler.postDelayed(this, 1000);
+                }
+                else
+                {
+                    handler.postDelayed(this, 1000);
+                }
+            }
+        }, 500);
+    }
+
+    public  boolean isInternetConnection() {
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        } else
+            connected = false;
+        return connected;
+    }
+
+    public void PlayClickButton() {
+        if (PlayMusicService.isPlayingMusic()) {
+            PlayMusicService.pauseMusic();
+            btn_play.setImageResource(R.drawable.playmusicplay);
+        }
+        else
+        {
+            PlayMusicService.startMusic();
+            btn_play.setImageResource(R.drawable.playmusicpause);
+        }
+    }
+
+    public void NextClickButton() {
+        int id_next = id_cur_on_playlist + 1;
+        if (id_next < arraySong.size()) {
+            PlayMusicById(id_next);
+        }
+        else {
+            Toast.makeText(this, "This is the last music!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void PreviousClickButton() {
+        int id_next = id_cur_on_playlist - 1;
+        if (id_next >= 0) {
+            PlayMusicById(id_next);
+        }
+        else {
+            Toast.makeText(this, "This is the first music!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void ShuffleClickButton() {
+        song_state = PlayMusicService.getSongStateNext();
+        if (song_state != 1) {
+            song_state = 1;
+            PlayMusicService.setSongStateNext(song_state);
+            btn_shuffle.setColorFilter(ContextCompat.getColor(this, R.color.choose_btn_playmusic_handler));
+            btn_repeat.setColorFilter(ContextCompat.getColor(this, R.color.notchoose_btn_playmusic_handler));
+        }
+        else {
+            song_state = 0;
+            PlayMusicService.setSongStateNext(song_state);
+            btn_shuffle.setColorFilter(ContextCompat.getColor(this, R.color.notchoose_btn_playmusic_handler));
+            btn_repeat.setColorFilter(ContextCompat.getColor(this, R.color.notchoose_btn_playmusic_handler));
+        }
+    }
+
+    public void RepeatClickButton() {
+        song_state = PlayMusicService.getSongStateNext();
+        if (song_state != 2) {
+            song_state = 2;
+            PlayMusicService.setSongStateNext(song_state);
+            btn_repeat.setColorFilter(ContextCompat.getColor(this, R.color.choose_btn_playmusic_handler));
+            btn_shuffle.setColorFilter(ContextCompat.getColor(this, R.color.notchoose_btn_playmusic_handler));
+        }
+        else {
+            song_state = 0;
+            PlayMusicService.setSongStateNext(song_state);
+            btn_repeat.setColorFilter(ContextCompat.getColor(this, R.color.notchoose_btn_playmusic_handler));
+            btn_shuffle.setColorFilter(ContextCompat.getColor(this, R.color.notchoose_btn_playmusic_handler));
+        }
     }
 
     private void InitialMedia() {
-//        PlayMp3 playmusic_mp3 = new PlayMp3();
-//        playmusic_mp3.execute(hotMusic.getLinkSong());
+//        PlayMusicService.setArraySong(arraySong);
         if (Integer.parseInt(song.getIdSong()) != PlayMusicService.getIdSongInt()) {
-//            Toast.makeText(this, hotMusic.getIdSong() + " = " + PlayMusicService.getIdSongString(), Toast.LENGTH_SHORT).show();
             PlayMusicService.setLinkSong(song.getIdSong(), song.getLinkSong());
             PlayMusicService.PlayNewMusic();
         }
+        id_cur_song = PlayMusicService.getIdSongInt();
         txt_time_current.setText(PlayMusicService.getTimeSongCurrent());
         txt_time_total.setText(PlayMusicService.getTimeSongTotal());
         seekbar_song.setMax(PlayMusicService.getTimeSongDuration());
-        int test = PlayMusicService.getTimeSongDuration();
-        btn_play.setImageResource(R.drawable.playmusicpause);
+        if (PlayMusicService.isPlayingMusic()) {
+            btn_play.setImageResource(R.drawable.playmusicpause);
+        }
+        else
+        {
+            btn_play.setImageResource(R.drawable.playmusicplay);
+        }
+        if (PlayMusicService.getSongStateNext() == 1) {
+            btn_shuffle.setColorFilter(ContextCompat.getColor(this, R.color.choose_btn_playmusic_handler));
+        }
+        else if (PlayMusicService.getSongStateNext() == 2) {
+            btn_repeat.setColorFilter(ContextCompat.getColor(this, R.color.choose_btn_playmusic_handler));
+        }
         UpdateTimeSong();
     }
 
     public void PlayMusicById(int id) {
         song = arraySong.get(id);
-        txtSong.setText(song.getNameSong());
-        txtSinger.setText(song.getNameSinger());
-        Picasso.with(this).load(song.getImgSong()).into(blurBackground);
-        fragment_playMusic_discMusic.urlImgSong = song.getImgSong();
-        fragment_playMusic_discMusic.setImgDiscMusic();
-        PlayMusicService.setLinkSong(song.getIdSong(), song.getLinkSong());
-        PlayMusicService.PlayNewMusic();
-        txt_time_current.setText(PlayMusicService.getTimeSongCurrent());
-        txt_time_total.setText(PlayMusicService.getTimeSongTotal());
-        seekbar_song.setMax(PlayMusicService.getTimeSongDuration());
-        btn_play.setImageResource(R.drawable.playmusicpause);
+        int id_temp = Integer.parseInt(song.getIdSong());
+        if (id_temp != id_cur_song) {
+            txtSong.setText(song.getNameSong());
+            txtSinger.setText(song.getNameSinger());
+            Picasso.with(this).load(song.getImgSong()).into(blurBackground);
+            fragment_playMusic_discMusic.urlImgSong = song.getImgSong();
+            fragment_playMusic_discMusic.setImgDiscMusic();
+            PlayMusicService.setLinkSong(song.getIdSong(), song.getLinkSong());
+            PlayMusicService.PlayNewMusic();
+            txt_time_current.setText(PlayMusicService.getTimeSongCurrent());
+            txt_time_total.setText(PlayMusicService.getTimeSongTotal());
+            seekbar_song.setMax(PlayMusicService.getTimeSongDuration());
+            btn_play.setImageResource(R.drawable.playmusicpause);
+            id_cur_song = PlayMusicService.getIdSongInt();
+            id_cur_on_playlist = id;
+            fragment_playMusic_playlist.SetBackgroundSongPlaylist(id_cur_on_playlist);
+        }
     }
 
     private void SetupViewPager2() {
@@ -195,10 +310,9 @@ public class PlayMusicActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null){
             if (intent.hasExtra("music_playlist_array")) {
-                int cur_id = (int) intent.getSerializableExtra("music_playlist_id_current");
+                id_cur_on_playlist = (int) intent.getSerializableExtra("music_playlist_id_current");
                 arraySong = (ArrayList<Song>) intent.getSerializableExtra("music_playlist_array");
-                song = arraySong.get(cur_id);
-                Log.d("song", String.valueOf(song));
+                song = arraySong.get(id_cur_on_playlist);
             }
         }
     }
@@ -236,6 +350,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                     PlayMusicService.getMediaPlayer().setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(MediaPlayer mediaPlayer) {
+                            song_next = true;
                             try {
                                 Thread.sleep(1000);
                             } catch (InterruptedException e) {

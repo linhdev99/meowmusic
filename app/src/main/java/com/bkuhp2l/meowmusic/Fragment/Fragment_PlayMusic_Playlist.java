@@ -56,11 +56,12 @@ public class Fragment_PlayMusic_Playlist extends Fragment implements SongPlaylis
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
-            SetBackgroundSongPlaylist();
+            SetBackgroundSongPlaylist(current_id);
         }
     }
 
-    public void SetBackgroundSongPlaylist() {
+    public void SetBackgroundSongPlaylist(int id) {
+        current_id = id;
         recyclerView.post(new Runnable() {
             @Override
             public void run() {
@@ -95,8 +96,7 @@ public class Fragment_PlayMusic_Playlist extends Fragment implements SongPlaylis
 
     @Override
     public void onSongClick(int position) {
-        current_id = position;
-        SetBackgroundSongPlaylist();
+//        SetBackgroundSongPlaylist(position);
         ((PlayMusicActivity)getActivity()).PlayMusicById(position);
     }
 }

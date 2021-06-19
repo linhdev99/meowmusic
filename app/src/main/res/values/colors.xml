@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="choose_song_play">#95673AB7</color>
     <color name="notchoose_song_play">#00FFFFFF</color>
+    <color name="choose_btn_playmusic_handler">#4CAF50</color>
+    <color name="notchoose_btn_playmusic_handler">#FFFFFF</color>
 </resources>
