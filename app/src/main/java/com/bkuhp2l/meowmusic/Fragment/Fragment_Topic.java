@@ -1,19 +1,28 @@
 package com.bkuhp2l.meowmusic.Fragment;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.browse.MediaBrowser;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bkuhp2l.meowmusic.Service.NotificationPlayMusic;
 import com.bkuhp2l.meowmusic.Adapter.TopicAdapter;
 import com.bkuhp2l.meowmusic.Model.Topic;
 import com.bkuhp2l.meowmusic.R;
@@ -26,6 +35,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static androidx.core.content.ContextCompat.getSystemService;
 
 public class Fragment_Topic extends Fragment {
     View view;
@@ -47,7 +58,8 @@ public class Fragment_Topic extends Fragment {
         btnViewmore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Topic", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), Fragment_Topic.class);
+                NotificationPlayMusic.showNotification(getActivity(), "Topic", "They are all topics", intent);
             }
         });
     }

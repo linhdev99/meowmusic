@@ -11,4 +11,6 @@
     <color name="notchoose_song_play">#00FFFFFF</color>
     <color name="choose_btn_playmusic_handler">#4CAF50</color>
     <color name="notchoose_btn_playmusic_handler">#FFFFFF</color>
+    <color name="tab_layout_default">#292929</color>
+    <color name="tab_layout_selected">#a845de</color>
 </resources>

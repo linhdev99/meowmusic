@@ -1,5 +1,7 @@
 package com.bkuhp2l.meowmusic.Service;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -17,7 +19,7 @@ public class APIRetrofitClient {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(10000, TimeUnit.MILLISECONDS)
                 .writeTimeout(10000,TimeUnit.MILLISECONDS)
-                .connectTimeout(100000, TimeUnit.MILLISECONDS)
+                .connectTimeout(10000, TimeUnit.MILLISECONDS)
                 .retryOnConnectionFailure(true)
                 .protocols(Arrays.asList(Protocol.HTTP_1_1))
                 .build();

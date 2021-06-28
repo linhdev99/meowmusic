@@ -15,33 +15,17 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PlayMusicService {
     public static PlayMusicService Mp3Service = new PlayMusicService();
-//    public static ArrayList<Song> arraySong;
     public static MediaPlayer mediaPlayer = null;
     public static PlayMp3 playmusic_mp3;
     public static String linkSong;
     public static String idSong;
     public static int song_state_next;
-//    public static boolean auto_next;
 
     public static PlayMusicService getInstance() {
         playmusic_mp3 = new PlayMp3();
-//        arraySong = new ArrayList<>();
         song_state_next = 0;
-//        auto_next = false;
         return Mp3Service;
     }
-
-//    public static boolean getAutoNextSong() {
-//        return auto_next;
-//    }
-//
-//    public static void setAutoNextSong(boolean state) {
-//        auto_next = state;
-//    }
-//
-//    public static void setArraySong(ArrayList<Song> arrayList) {
-//        arraySong = arrayList;
-//    }
 
     public static int getSongStateNext() {
         return song_state_next;
@@ -58,21 +42,6 @@ public class PlayMusicService {
     public static void PlayNewMusic() {
         playmusic_mp3.initialPlayMp3(linkSong);
         mediaPlayer = playmusic_mp3.getMediaPlayer();
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (mediaPlayer != null) {
-//                    auto_next = false;
-//                    UpdateCheckAutoNext();
-//                    UpdatePlayMusicAutoNextSong();
-//                    Log.d("TAG", "auto update check auto next");
-//                }
-//                else {
-//                    handler.postDelayed(this,100);
-//                }
-//            }
-//        },300);
     }
 
     public static String getTimeSongTotal() {
@@ -120,45 +89,6 @@ public class PlayMusicService {
         }
         return result;
     }
-
-//    private static void UpdatePlayMusicAutoNextSong() {
-//        Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (auto_next)
-//                {
-//                    Log.d("TAG","Next Song");
-//                    return;
-//                }
-//                else
-//                {
-//                    handler.postDelayed(this, 1000);
-//                }
-//            }
-//        }, 500);
-//    }
-
-//    private static void UpdateCheckAutoNext() {
-//        Log.d("TAG", "UpdateCheckAutoNext 2");
-//        Handler handler_UpdateCheckAutoNext = new Handler();
-//        handler_UpdateCheckAutoNext.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (mediaPlayer != null) {
-//                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                        @Override
-//                        public void onCompletion(MediaPlayer mediaPlayer) {
-//                            auto_next = true;
-//                            Log.d("TAG", "UpdateCheckAutoNext");
-//                            return;
-//                        }
-//                    });
-//                }
-//                handler_UpdateCheckAutoNext.postDelayed(this, 300);
-//            }
-//        }, 300);
-//    }
 
     public static String getIdSongString() {
         return idSong;

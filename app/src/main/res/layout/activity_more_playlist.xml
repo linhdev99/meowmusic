@@ -7,6 +7,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#FFF"
+    android:largeHeap="true"
+    android:hardwareAccelerated="false"
     tools:context=".Activity.MorePlaylistActivity">
     <fragment
         android:id="@+id/fragment_more_playlist_background"

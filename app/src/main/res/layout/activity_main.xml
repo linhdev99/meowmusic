@@ -1,34 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:screenOrientation="portrait"
     tools:context=".Activity.MainActivity">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/myViewPager"
-        android:layout_weight="1"
+    <fragment
+        android:layout_alignBottom="@+id/main_line_2"
+        android:id="@+id/fragment_activity_home"
+        android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Home"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layoutDirection="ltr">
+        android:layout_height="match_parent">
 
-    </androidx.viewpager2.widget.ViewPager2>
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/myTabLayout"
+    </fragment>
+    <Space
+        android:id="@+id/main_line_2"
+        android:layout_alignTop="@+id/fragment_activity_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@android:color/transparent"
-        app:tabTextAppearance="@style/TabLayoutMain"
-        app:tabIndicatorColor="#a845de"
-        app:tabIndicatorHeight="2dp"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="#a845de"
-        app:tabTextColor="#000000">
+        android:layout_height="1dp">
 
-    </com.google.android.material.tabs.TabLayout>
+    </Space>
+    <fragment
+        android:layout_alignParentBottom="true"
+        android:id="@+id/fragment_activity_tablayout"
+        android:name="com.bkuhp2l.meowmusic.Fragment.Fragment_Main_TabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+    </fragment>
+
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/myViewPager"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layoutDirection="ltr">-->
+
+<!--    </androidx.viewpager2.widget.ViewPager2>-->
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/myTabLayout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        app:tabTextAppearance="@style/TabLayoutMain"-->
+<!--        app:tabIndicatorColor="#a845de"-->
+<!--        app:tabIndicatorHeight="2dp"-->
+<!--        app:tabMode="fixed"-->
+<!--        app:tabSelectedTextColor="#a845de"-->
+<!--        app:tabTextColor="#000000">-->
+
+<!--    </com.google.android.material.tabs.TabLayout>-->
+
+</RelativeLayout>
